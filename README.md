@@ -16,6 +16,7 @@ The most basic usage is to call dropdownable on a select box like so:
     
 However, things get a bit more interesting with options: 
 
+```
    $('#dropdownable').dropdownable( {
         onShowOptions : function (){ $(this).style( { 'background-color' : 'red'} ) }, //runs when options are shown
         onHideOptions : function (){ }, //runs when options are hidden
@@ -29,3 +30,4 @@ However, things get a bit more interesting with options:
             )
         }
     } );
+```
