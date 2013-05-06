@@ -1,0 +1,76 @@
+.dropdownable{
+    position: relative;
+    border: 2px solid #CCC;
+    padding: 4px;
+    height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.dropdownable-container{
+    display: inline-block;
+}
+
+.dropdownable:before,.dropdownable:after {
+    content:"";
+    display:table;
+}
+
+.dropdownable:after {
+    clear:both;
+}
+
+.dropdownable .current-value{
+    float: left;
+}
+
+.dropdownable .arrow{
+    width: 9px;
+    height: 5px;
+    background-image: url('data:image/gif;base64,R0lGODlhCQAFAPcAAAAAAOWOGgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAJAAUAAAgWAAMIHDjwH8GC/wwSTMgQIcOEAR4GBAA7');
+    background-repeat: no-repeat;
+    background-position:center;
+    padding: 0;
+    margin-top: 7px;
+    margin-right: 6px;
+    float: right;
+}
+
+.dropdownable-container .options{
+    position: absolute;
+    display: none;
+}
+
+.dropdownable-container .options ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    border: 2px solid #CCC;
+    margin-top: -2px;
+    border-radius: 0 0 4px 4px;
+    background-color: #FFF;
+}
+
+.dropdownable-container .options ul li{
+    padding: 4px 35px 4px 8px;
+    cursor: pointer;
+}
+
+.dropdownable-container .options ul li:hover, .dropdownable-container .options ul li.hover{
+    background-color: #FAE9D1
+}
+
+
+.dropdownable-open{
+    border-radius: 4px 4px 0 0;
+}
+
+.focus{
+    border: 2px solid rgb(247, 135, 5);
+}
+
+.dropdownable-container .options ul.options-focus{
+    border: 2px solid rgb(247, 135, 5);
+}

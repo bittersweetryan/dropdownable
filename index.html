@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+        input{
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="dropdownable.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+   <select name="hello" id="dropdownable_ex1" tabindex="1">
+        <option>Select One...</option>
+        <option value="1" data-category>Cars</option>
+        <option value="2">-Sports Cars</option>
+        <option value="3">-SUV's</option>
+        <option value="4" data-category>Bikes</option>
+        <option value="5">Mountain</option>
+        <option value="6">Road</option>
+        <option value="95">Supercalafranglisticexpealodishis</option>
+    </select>
+    
+    <select name="hello" id="dropdownable_ex2" tabindex="2">
+        <option>Select One...</option>
+        <option value="1" data-url="http://www.espn.com">ESPN</option>
+        <option value="2" data-url="http://www.github.com">GitHub</option>
+        <option value="3" data-url="http://www.jquery.com">jQuery</option>
+    </select>
+    <input tabindex="3">
+    
+    <script src="jquery.dropdownable.js"></script>
+    <script>
+        $(function(){
+            $('#dropdownable_ex1').dropdownable( );
+            
+            $('#dropdownable_ex2').dropdownable( {
+                onShowOptions : function (){ $(this).style( { 'background-color' : 'red'} ) }, //runs when options are shown
+                onHideOptions : function (){ }, //runs when options are hidden
+                onSelect : function(){ console.log( $(this).data( 'value' ) ); }, //runs whenever an option is selected
+                tabIndex : 2,
+                onCreate : function( option ){ 
+                    var $this = $( this );
+
+                    $this.html(
+                        '<a href="' + $( option ).data( 'url' ) + '" target="_blank">' + $this.text() + '</a>'
+                    )
+                }
+            } );
+        });
+    </script>
+</body>
+</html>
