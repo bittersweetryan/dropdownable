@@ -56,10 +56,14 @@
 		/*********
 		* events
 		*********/
-		$newEl.find( '.dropdownable' ).on( 'click', function(){
+		$newEl.find( '.dropdownable' ).on( 'click', function( e ){
 
-			showOptions();
-
+			if( !$newEl.find( '.options' ).is( ':visible' ) ){
+				showOptions();
+			}
+			else{
+				hideOptions();
+			}
 		} );
 
 		$( document ).on( 'click' , function( e ){
