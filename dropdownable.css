@@ -40,6 +40,7 @@
 .dropdownable-container .options{
     position: absolute;
     display: none;
+    min-width: 160px;
 }
 
 .dropdownable-container .options ul{
@@ -51,6 +52,7 @@
     margin-top: -2px;
     border-radius: 0 0 4px 4px;
     background-color: #FFF;
+    min-width: 160px;
 }
 
 .dropdownable-container .options ul li{
