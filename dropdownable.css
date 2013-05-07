@@ -22,7 +22,7 @@
 }
 
 .dropdownable .current-value{
-    float: left;
+    display: inline-block;
 }
 
 .dropdownable .arrow{
