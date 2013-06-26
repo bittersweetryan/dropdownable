@@ -1,9 +1,11 @@
 ;(function( $ ){
 
 	$.fn.dropdownable = function( options ){
+		var defaultTabIndex = 9999; //default to high number
+
 		this.each( setupDropdownable );
-        
-        function setupDropdownable(){
+
+		function setupDropdownable(){
 			var $this = $(this),
 				$newEl = $('<div class="dropdownable-container"><div class="dropdownable clearfix"><div class="current-value"></div><div class="arrow"></div></div><div class="options"></div></div>'),
 				$newOpts = $('<ul>'), //this will hold our new line items for the replaced content
@@ -28,11 +30,7 @@
 					.text( $opts.filter( ':first' ).text() );
 			}
 
-			var tabIndex = options.tabindex || $this.attr( 'tabindex' );
-
-			if( typeof tabIndex !== 'undefined' ){
-				$newEl.attr( 'tabindex', tabIndex );
-			}
+			$newEl.attr( 'tabindex', options.tabindex || $this.attr( 'tabindex' ) || defaultTabIndex++ );
 
 			$opts.each( createNewElements );
 
@@ -66,30 +64,29 @@
 					.find( 'ul' )
 					.addClass( 'options-focus' );
 			})
-            .on( 'keydown', function( e ){
-                
-                var keyEvents = {
-                    40 : handleKeyDown,
-                    38 : handleKeyUp,
-                    13 : handleEnterKey
-                }
-                
-                if( respondToKeydown && e.which in keyEvents){
-                    
-                    keyEvents[ e.which ]();
-                    
-                    respondToKeydown = false;
-                    
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
+			.on( 'keydown', function( e ){
+				var keyEvents = {
+					40 : handleKeyDown,
+					38 : handleKeyUp,
+					13 : handleEnterKey
+				};
+
+				if( respondToKeydown && e.which in keyEvents){
+
+					keyEvents[ e.which ]();
+
+					respondToKeydown = false;
+
+					e.preventDefault();
+					e.stopPropagation();
+				}
 			} )
-            .on( 'keyup', function( e ){
-                
-                respondToKeydown = true;
-                
+			.on( 'keyup', function( e ){
+
+				respondToKeydown = true;
+
 			} )
-            .on( 'blur' , function(){
+			.on( 'blur' , function(){
 				var $this = $( this );
 
 				$this.find( '.dropdownable' )
@@ -184,9 +181,13 @@
 					showOptions();
 				}
 
-				currentOption.prev().removeClass( 'hover' );
+				console.log( currentOption );
 
-				currentOption.addClass( 'hover' );
+				currentOption
+					.prev()
+					.removeClass( 'hover' )
+					.end()
+					.addClass( 'hover' );
 			}
 
 			function handleKeyUp(){
@@ -195,13 +196,14 @@
 					currentOption = currentOption.prev();
 				}
 
-				currentOption.next().removeClass( 'hover' );
-
-				currentOption.addClass( 'hover' );
+				currentOption.next()
+					.removeClass( 'hover' )
+					.end()
+					.addClass( 'hover' );
 			}
-			
+
 			function handleEnterKey(){
-                currentOption.trigger( 'click' );
+				currentOption.trigger( 'click' );
 			}
 
 			function createNewElements( i ){
@@ -226,7 +228,7 @@
 
 				$newOpts.append( $newItem );
 			}
-		};
+		}
 
 		return this;
 	};
