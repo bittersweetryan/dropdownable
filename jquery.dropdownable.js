@@ -1,12 +1,15 @@
 ;(function( $ ){
 
 	$.fn.dropdownable = function( options ){
-		this.each(function(){
+		this.each( setupDropdownable );
+        
+        function setupDropdownable(){
 			var $this = $(this),
 				$newEl = $('<div class="dropdownable-container"><div class="dropdownable clearfix"><div class="current-value"></div><div class="arrow"></div></div><div class="options"></div></div>'),
-				$newOpts = $('<ul>'),
+				$newOpts = $('<ul>'), //this will hold our new line items for the replaced content
 				$opts = $this.find('option'),
-				currentOption = null;
+				currentOption = null,
+				respondToKeydown = true;
 
 			var defaults = {
 				showFirst : true,
@@ -62,29 +65,31 @@
 					.find( '.options' )
 					.find( 'ul' )
 					.addClass( 'options-focus' );
-			});
-
-			$newEl.on( 'keydown', function( e ){
-
-				var opt;
-
-				//keydown
-				if( e.which && e.which === 40 ){
-					handleKeyDown();
-				}
-				//keyup
-				else if( e.which && e.which === 38 ){
-					handleKeyUp();
-				}
-				//enter
-				else if( e.which && e.which === 13 ){
-
-					currentOption.trigger( 'click' );
-				}
-
-			} );
-
-			$newEl.on( 'blur' , function(){
+			})
+            .on( 'keydown', function( e ){
+                
+                var keyEvents = {
+                    40 : handleKeyDown,
+                    38 : handleKeyUp,
+                    13 : handleEnterKey
+                }
+                
+                if( respondToKeydown && e.which in keyEvents){
+                    
+                    keyEvents[ e.which ]();
+                    
+                    respondToKeydown = false;
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+			} )
+            .on( 'keyup', function( e ){
+                
+                respondToKeydown = true;
+                
+			} )
+            .on( 'blur' , function(){
 				var $this = $( this );
 
 				$this.find( '.dropdownable' )
@@ -194,6 +199,10 @@
 
 				currentOption.addClass( 'hover' );
 			}
+			
+			function handleEnterKey(){
+                currentOption.trigger( 'click' );
+			}
 
 			function createNewElements( i ){
 				var $newItem;
@@ -217,7 +226,7 @@
 
 				$newOpts.append( $newItem );
 			}
-		});
+		};
 
 		return this;
 	};
