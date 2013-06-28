@@ -127,24 +127,20 @@
 			//create a clone to add to the DOM offscreen to get sizing
 			$tempClone = $newEl.clone();
 
-			$tempClone.css( { left : '-5000px', position : 'absolute' } )
+			$tempClone.css( { left : '000px', position : 'absolute' } )
 				.attr( 'id', 'temp-clone-node' )
-				.find('.options').css( { display : 'inline-block' } );
+				.find('.options').css( { display : 'block', position : 'relative' } );
 
-			$('body').append( '<div class="dropdownable-container" id="temp-dropdownable-container">' + $tempClone.html() + '</div>');
+			$tempClone.wrap('<div class="dropdownable-container">');
 
-			var $tempContainer = $('#temp-dropdownable-container');
+			$('body').append( $tempClone );
 
-			$newEl.find('.dropdownable').css( { width : $tempContainer.find( 'ul' ).width() - 8 } );
-
-			$tempContainer.remove();
+			$newEl.find('.dropdownable').css( { width : $tempClone.find( 'ul' ).width() - 8 } );
+			console.log( $tempClone.find( 'ul' ) );
+			//$tempContainer.remove();
 
 			//replace the original dropdown with our new one
 			$this.replaceWith( $newEl );
-
-			if( $( '.dropdownable-container ').width() !== $( '.dropdownable-container ').find( '.options' ).width() ){
-				$( '.dropdownable ').css( { width : $( '.dropdownable-container ').find( '.options' ).width()- 12} );
-			}
 
 			function showOptions(){
 
