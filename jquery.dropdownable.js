@@ -136,7 +136,7 @@
 			$('body').append( $tempClone );
 
 			$newEl.find('.dropdownable').css( { width : $tempClone.find( 'ul' ).width() - 8 } );
-			$tempContainer.remove();
+			$tempClone.remove();
 
 			//replace the original dropdown with our new one
 			$this.replaceWith( $newEl );
